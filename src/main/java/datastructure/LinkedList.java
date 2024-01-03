@@ -89,6 +89,7 @@ public class LinkedList {
             return;
         }
 
+        //starting the iteration
         Node node = head;
 
         while (node.next != null) {
