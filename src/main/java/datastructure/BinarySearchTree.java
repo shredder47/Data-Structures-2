@@ -52,7 +52,6 @@ class BinarySearchTree {
 
         BTNode btNode = find(key, root);
 
-
         return btNode != null ? btNode.value : null;
     }
 
@@ -199,6 +198,46 @@ class BinarySearchTree {
     public int findMinKey() {
         return root.getMin().key;
     }
+
+    public void printInOrderTraversal() {
+        System.out.println("InOrder:");
+        inOrderTraversal(root);
+    }
+
+    private void inOrderTraversal(BTNode node) {
+        if (node != null) {
+            inOrderTraversal(node.left);
+            System.out.println(node.key);
+            inOrderTraversal(node.right);
+        }
+    }
+
+    public void printPreOrderTraversal() {
+        System.out.println("PreOrder:");
+        preOrderTraversal(root);
+    }
+
+    private void preOrderTraversal(BTNode node) {
+        if (node != null) {
+            System.out.println(node.key); // root
+            preOrderTraversal(node.left);
+            preOrderTraversal(node.right);
+        }
+    }
+
+    public void printPostOrderTraversal() {
+        System.out.println("PostOrder:");
+        postOrderTraversal(root);
+    }
+
+    private void postOrderTraversal(BTNode node) {
+        if (node != null) {
+            postOrderTraversal(node.left);
+            postOrderTraversal(node.right);
+            System.out.println(node.key);
+        }
+    }
+
 
 
     public static class BTNode {
