@@ -66,6 +66,23 @@ public class BinarySearchTreeTest {
     }
 
     @Test
+    public void DeleteTwoChild2() {
+        bst.insert(5, "e");
+        bst.insert(3, "c");
+        bst.insert(7, "b");
+        bst.insert(2, "d");
+        bst.insert(6, "g");
+        bst.insert(8, "f");
+        bst.insert(9, "h");
+
+        bst.delete(7); // making sure the case 2 is forced
+//
+        Assert.assertNull(bst.find(7));
+
+        bst.prettyPrint();
+    }
+
+    @Test
     public void DeleteOneChild() {
         bst.insert(5, "e");
         bst.insert(3, "c");

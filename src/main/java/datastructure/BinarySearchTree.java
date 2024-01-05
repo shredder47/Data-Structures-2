@@ -26,7 +26,7 @@ class BinarySearchTree {
     private BTNode insert(BTNode node, int key, String value) {
 
 
-        //If node is null, set the new node as it is...
+        // Base Case : If node is null, set the new node as it is...
         if (node == null) {
 
             //create the new node to be inserted and set it
@@ -107,42 +107,32 @@ class BinarySearchTree {
     // 3rd case delete more simple by transforming it into case 1.
 
     /*
-                 1
+                 5
                 / \
                /   \
-              2     \
-             / \     3
-            4   5   / \
-                   9   \
+              3     \
+             / \     7
+            2       / \
+                   6   \
                         8
                        / \
-                      6   7
+                          9
       For coding reference
     */
 
     private BTNode delete(BTNode node, int key) {
 
+        // Base case when no node found
         if (node == null) return null;
 
-        if (key < node.key)
-            node.left = delete(node.left, key);
-
-        if (key > node.key)
-            node.right = delete(node.right, key);
-
-        //CASE when we found the node with the key
+        // Base case when we found the node with the key
         if (key == node.key) {
 
             //CASE1: When it's a leaf Node
-
-            if (node.left == null && node.right == null) {
-                node = null;
-
-            } //CASE2: When it has only one child
-            else if (node.left == null)
-                node = node.right;
-            else if (node.right == null)
-                node = node.left;
+            if (node.left == null && node.right == null) node = null;
+            //CASE2: When it has only one child
+            else if (node.left == null)  node = node.right;
+            else if (node.right == null)  node = node.left;
             else {
                 //CASE3: Having two Child
 
@@ -156,14 +146,22 @@ class BinarySearchTree {
                 node.key = minKey;
                 node.value = minValue;
 
-                //deleting the min value we just captured, as the mean value will be a leaf, so making a recursive call to deleting
-                //which will be a CASE1 deletion :)
+                //deleting the min value we just captured, so making a recursive call to deleting
+                //which will be a CASE1/2 deletion  :)
                 node.right = delete(node.right,minKey);
 
             }
-
-
+            //Return the mutated node to the caller
+            return node;
         }
+
+        //not found? keep traversing left or right depending on the key
+        if (key < node.key)
+            node.left = delete(node.left, key);
+
+        if (key > node.key)
+            node.right = delete(node.right, key);
+
 
         return node;
     }
