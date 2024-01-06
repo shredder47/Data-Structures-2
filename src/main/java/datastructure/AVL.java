@@ -21,13 +21,18 @@ public class AVL {
     }
 
     /*
-              Y
-            /  \         Right Rotation
-           X   T3     --------------------->            X
-          / \         <--------------------            / \
-        T1  T2           Left Rotation                T1  Y
-                                                         / \
-                                                        T2  T3
+        T1, T2 and T3 are subtrees of the tree rooted with y (on left side)
+        or x (on right side)
+
+                        y                               x
+                       / \     Right Rotation          /  \
+                      x   T3   – - – - – - – >        T1   y
+                     / \       < - - - - - - -            / \
+                    T1  T2     Left Rotation            T2  T3
+
+        Keys in both of the above trees follow the following order
+              keys(T1) < key(x) < keys(T2) < key(y) < keys(T3)
+        So BST property is not violated anywhere.
      */
 
            /*
