@@ -9,54 +9,6 @@ public class AVL {
     public AVL() {
     }
 
-    public int height(Node node) {
-        if (node == null)
-            return 0;
-        else
-            return node.nodeHeight;
-    }
-
-    public void insert(int key) {
-
-        root = insert(root, key);
-
-    }
-
-    /*
-        T1, T2 and T3 are subtrees of the tree rooted with y (on left side)
-        or x (on right side)
-
-                        y                               x
-                       / \     Right Rotation          /  \
-                      x   T3   – - – - – - – >        T1   y
-                     / \       < - - - - - - -            / \
-                    T1  T2     Left Rotation            T2  T3
-
-        Keys in both of the above trees follow the following order
-              keys(T1) < key(x) < keys(T2) < key(y) < keys(T3)
-        So BST property is not violated anywhere.
-     */
-
-           /*
-              30                          30                                              30                                    20
-             /         20                /                                               /                                     /  \
-           20    >    /  \              20        --> RotateLeft(30.left)              20       -->  RotateRight(30)  ->>    25    30
-          /         10    30              \                                           /
-        10                                25                                         25
-         */
-
-    /*/**********************************************************************************************************
-     *  Situation when inserting 10, after successfully insertion of 10, all the node balances went well butt when recursing back to node 30, RR situation arises
-     *
-     *       30   h = 3,  nB = 2     -->  h(30.left) - h(null.right) -> (2-0) = 2 which is greater than 1, Triggering LL
-     *       /
-     *     20     h = 2,  nB = 1    ^
-     *    /                         |
-     *  10        h = 1,  nB = 0;   |
-     *                              |
-     ******************/
-
-
     private Node insert(Node node, int key) {
 
         // Base Case when node is null add a new Node
@@ -104,86 +56,40 @@ public class AVL {
     }
 
     /*
+        T1, T2 and T3 are subtrees of the tree rooted with y (on left side)
+        or x (on right side)
+
+                        y                               x
+                       / \     Right Rotation          /  \
+                      x   T3   – - – - – - – >        T1   y
+                     / \       < - - - - - - -            / \
+                    T1  T2     Left Rotation            T2  T3
+
+        Keys in both of the above trees follow the following order
+              keys(T1) < key(x) < keys(T2) < key(y) < keys(T3)
+        So BST property is not violated anywhere.
+
+              30                          30                                              30                                    20
+             /         20                /                                               /                                     /  \
+           20    >    /  \              20        --> RotateLeft(30.left)              20       -->  RotateRight(30)  ->>    25    30
+          /         10    30              \                                           /
+        10                                25                                         25
 
 
-              Y
-            /  \         Right Rotation
-           X   T3     --------------------->            X
-          / \                                          / \
-        T1  T2                                        T1  Y
-                                                         / \
-                                                        T2  T3
+       Situation when inserting 10, after successfully insertion of 10, all the node balances went well butt when recursing back to node 30, RR situation arises
 
-     */
+            30   h = 3,  nB = 2     -->  h(30.left) - h(null.right) -> (2-0) = 2 which is greater than 1, Triggering LL
+            /
+          20     h = 2,  nB = 1    ^
+         /                         |
+       10        h = 1,  nB = 0;   |
+                                   |
+    */
+    public void insert(int key) {
 
-    private Node rotateRight(Node Y) {
+        root = insert(root, key);
 
-        Node X = Y.left;
-        Node T2 = X.right; // coz Y will be inserted here, else this pointer will be lost
-
-        //SWAP
-        X.right = Y;
-        Y.left = T2;
-
-        // Update the heights after the rearrangement
-        Y.nodeHeight = 1 + max(height(Y.left), height(Y.right)); // Imp to update Y first
-        X.nodeHeight = 1 + max(height(X.left), height(Y.right));
-
-        return X; //Important to send X
     }
-
-    /*
-
-
-            X
-           / \
-          T1  Y                                         Y
-             / \          Left Rotate                  / \
-            T2  T3    --------------------->          X   T3
-                                                     / \
-                                                    T1  T2
-
-     */
-
-    private Node rotateLeft(Node X) {
-
-        Node Y = X.right;
-        Node T2 = Y.left; // coz X will be inserted here, else this pointer will be lost
-
-        //SWAP
-        Y.left = X;
-        X.right = T2;
-
-        // Update the heights after the rearrangement
-        X.nodeHeight = 1 + max(height(X.left), height(X.right)); // Imp to update X first
-        Y.nodeHeight = 1 + max(height(Y.left), height(Y.right));
-
-        return Y; //Important to send Y
-    }
-
-    // if balance less than -1 or more, then 1 then needs balancing
-    private int getBalance(Node node) {
-        if (node == null)
-            return 0;
-
-        //
-        return height(node.left) - height(node.right);
-    }
-
-    public void printPreOrderTraversal() {
-        printPreOrderTraversal(root);
-    }
-
-    public void printPreOrderTraversal(Node node) {
-        if (node == null)
-            return;
-
-        System.out.print(node.key + " ");
-
-        printPreOrderTraversal(node.left);
-        printPreOrderTraversal(node.right);
-    }
-
     public void deleteNode(int key) {
         root = deleteNode(root, key);
     }
@@ -275,6 +181,96 @@ public class AVL {
         }
 
         return node;
+    }
+
+
+    // Standard Routine Functions
+    public int height(Node node) {
+        if (node == null)
+            return 0;
+        else
+            return node.nodeHeight;
+    }
+
+    /*
+
+
+              Y
+            /  \         Right Rotation
+           X   T3     --------------------->            X
+          / \                                          / \
+        T1  T2                                        T1  Y
+                                                         / \
+                                                        T2  T3
+
+     */
+
+    private Node rotateRight(Node Y) {
+
+        Node X = Y.left;
+        Node T2 = X.right; // coz Y will be inserted here, else this pointer will be lost
+
+        //SWAP
+        X.right = Y;
+        Y.left = T2;
+
+        // Update the heights after the rearrangement
+        Y.nodeHeight = 1 + max(height(Y.left), height(Y.right)); // Imp to update Y first
+        X.nodeHeight = 1 + max(height(X.left), height(Y.right));
+
+        return X; //Important to send X
+    }
+
+    /*
+
+
+            X
+           / \
+          T1  Y                                         Y
+             / \          Left Rotate                  / \
+            T2  T3    --------------------->          X   T3
+                                                     / \
+                                                    T1  T2
+
+     */
+
+    private Node rotateLeft(Node X) {
+
+        Node Y = X.right;
+        Node T2 = Y.left; // coz X will be inserted here, else this pointer will be lost
+
+        //SWAP
+        Y.left = X;
+        X.right = T2;
+
+        // Update the heights after the rearrangement
+        X.nodeHeight = 1 + max(height(X.left), height(X.right)); // Imp to update X first
+        Y.nodeHeight = 1 + max(height(Y.left), height(Y.right));
+
+        return Y; //Important to send Y
+    }
+
+    // if balance less than -1 or more, then 1 then needs balancing
+    private int getBalance(Node node) {
+        if (node == null)
+            return 0;
+
+        //
+        return height(node.left) - height(node.right);
+    }
+
+    public void printPreOrderTraversal() {
+        printPreOrderTraversal(root);
+    }
+
+    public void printPreOrderTraversal(Node node) {
+        if (node == null)
+            return;
+
+        System.out.print(node.key + " ");
+
+        printPreOrderTraversal(node.left);
+        printPreOrderTraversal(node.right);
     }
 
     String getPreOrderString() {
