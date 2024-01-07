@@ -9,7 +9,7 @@ public class AVL {
     public AVL() {
     }
 
-    public int height(Node node){
+    public int height(Node node) {
         if (node == null)
             return 0;
         else
@@ -57,7 +57,7 @@ public class AVL {
      ******************/
 
 
-    public Node insert(Node node, int key) {
+    private Node insert(Node node, int key) {
 
         // Base Case when node is null add a new Node
         if (node == null) {
@@ -73,28 +73,28 @@ public class AVL {
 
         // After successful node assignment , increase the height of the current node
         // height of current node = max height of any child + 1 (counting himself)
-        node.nodeHeight = 1 + max(height(node.left),height(node.right));
+        node.nodeHeight = 1 + max(height(node.left), height(node.right));
 
         int nodeBalance = getBalance(node);
 
         //Case LL
-        if(nodeBalance > 1 && key < node.left.key ){
-            return rotateRight(node) ; // perform LL rotation
+        if (nodeBalance > 1 && key < node.left.key) {
+            return rotateRight(node); // perform LL rotation
 
         }
         //Case LR
-        if(nodeBalance > 1 && key > node.left.key){
+        if (nodeBalance > 1 && key > node.left.key) {
             node.left = rotateLeft(node.left);// Make it LL
             return rotateRight(node); //  perform LL rotation
 
         }
         //CASE RR
-        if(nodeBalance < -1 && key > node.right.key  ){
-            return rotateLeft(node) ; // perform left rotation
+        if (nodeBalance < -1 && key > node.right.key) {
+            return rotateLeft(node); // perform left rotation
 
         }
         //Case RL
-        if(nodeBalance < -1 && key < node.right.key){
+        if (nodeBalance < -1 && key < node.right.key) {
             node.right = rotateRight(node.right);// Make it RR
             return rotateLeft(node); //  perform left rotation
 
@@ -126,8 +126,8 @@ public class AVL {
         Y.left = T2;
 
         // Update the heights after the rearrangement
-        Y.nodeHeight = 1 + max(height(Y.left),height(Y.right)); // Imp to update Y first
-        X.nodeHeight = 1 + max(height(X.left),height(Y.right));
+        Y.nodeHeight = 1 + max(height(Y.left), height(Y.right)); // Imp to update Y first
+        X.nodeHeight = 1 + max(height(X.left), height(Y.right));
 
         return X; //Important to send X
     }
@@ -155,141 +155,146 @@ public class AVL {
         X.right = T2;
 
         // Update the heights after the rearrangement
-        X.nodeHeight = 1 + max(height(X.left),height(X.right)); // Imp to update X first
-        Y.nodeHeight = 1 + max(height(Y.left),height(Y.right));
+        X.nodeHeight = 1 + max(height(X.left), height(X.right)); // Imp to update X first
+        Y.nodeHeight = 1 + max(height(Y.left), height(Y.right));
 
         return Y; //Important to send Y
     }
 
     // if balance less than -1 or more, then 1 then needs balancing
     private int getBalance(Node node) {
-        if(node == null)
+        if (node == null)
             return 0;
 
         //
         return height(node.left) - height(node.right);
     }
 
-    public void printInOrderTraversal() {
-        printInOrderTraversal(root);
+    public void printPreOrderTraversal() {
+        printPreOrderTraversal(root);
     }
 
-    public void printInOrderTraversal(Node node){
+    public void printPreOrderTraversal(Node node) {
         if (node == null)
             return;
 
-        printInOrderTraversal(node.left);
-        System.out.println(node.key);
-        printInOrderTraversal(node.right);
+        System.out.print(node.key + " ");
+
+        printPreOrderTraversal(node.left);
+        printPreOrderTraversal(node.right);
     }
 
-    /* Given a non-empty binary search tree, return the
-   node with minimum key value found in that tree.
-   Note that the entire tree does not need to be
-   searched. */
-    Node minValueNode(Node node)
-    {
-        Node current = node;
-
-        /* loop down to find the leftmost leaf */
-        while (current.left != null)
-            current = current.left;
-
-        return current;
+    public void deleteNode(int key) {
+        root = deleteNode(root, key);
     }
 
-    Node deleteNode(Node root, int key)
-    {
-        // STEP 1: PERFORM STANDARD BST DELETE
-        if (root == null)
-            return root;
+      /*
+           20
+          /  \
+        15    25
+       /
+      10
+    */
 
-        // If the key to be deleted is smaller than
-        // the root's key, then it lies in left subtree
-        if (key < root.key)
-            root.left = deleteNode(root.left, key);
+    /**
+     * Perform standard delete using BST Logic. Once Deletion is done, while recursing back, check the balance factor
+     * of the visiting node and fix if required
+     *
+     * @param node - Root Node
+     * @param key  - key to delete
+     * @return Mutated Root Node
+     */
+    Node deleteNode(Node node, int key) {
 
-            // If the key to be deleted is greater than the
-            // root's key, then it lies in right subtree
-        else if (key > root.key)
-            root.right = deleteNode(root.right, key);
+        // PERFORM STANDARD BST DELETE
 
-            // if key is same as root's key, then this is the node
-            // to be deleted
-        else
-        {
+        if (node == null)
+            return null;
 
-            // node with only one child or no child
-            if ((root.left == null) || (root.right == null))
-            {
-                Node temp = null;
-                if (temp == root.left)
-                    temp = root.right;
-                else
-                    temp = root.left;
+        if (key < node.key)
+            node.left = deleteNode(node.left, key);
+        else if (key > node.key)
+            node.right = deleteNode(node.right, key);
+        else {
 
-                // No child case
-                if (temp == null)
-                {
-                    temp = root;
-                    root = null;
-                }
-                else // One child case
-                    root = temp; // Copy the contents of
-                // the non-empty child
+            // Found the Key
+            // Case 1:
+            if (node.left == null && node.right == null) {
+                node = null; // Simply Null the current leaf node.
+                return node;
             }
-            else
-            {
+            // Case 2:
+            else if (node.right == null) {
+                node = node.left;
+                return node;
+            } else if (node.left == null) {
+                node = node.right;
+                return node;
+            } else {
 
-                // node with two children: Get the inorder
-                // successor (smallest in the right subtree)
-                Node temp = minValueNode(root.right);
+                //getting current node's right Child's MIN
+                Node rightChildMin = node.right.getMin();
 
-                // Copy the inorder successor's data to this node
-                root.key = temp.key;
+                // overriding current node's key with the min
+                node.key = rightChildMin.key;
 
-                // Delete the inorder successor
-                root.right = deleteNode(root.right, temp.key);
+                //delete the that we just found a duplicated
+
+                node.right = deleteNode(node.right, rightChildMin.key);
+                return node;
+
             }
         }
 
-        // If the tree had only one node then return
-        if (root == null)
-            return root;
+        // UPDATE HEIGHT OF THE CURRENT NODE
+        node.nodeHeight = max(height(node.left), height(node.right)) + 1;
 
-        // STEP 2: UPDATE HEIGHT OF THE CURRENT NODE
-        root.nodeHeight = max(height(root.left), height(root.right)) + 1;
+        // { -1 , 0 , +1 }
+        int balance = getBalance(node);
 
-        // STEP 3: GET THE BALANCE FACTOR OF THIS NODE (to check whether
-        // this node became unbalanced)
-        int balance = getBalance(root);
+        //If balance Hampered, Do Rotations
 
-        // If this node becomes unbalanced, then there are 4 cases
-        // Left Left Case
-        if (balance > 1 && getBalance(root.left) >= 0)
-            return rotateRight(root);
+        // Current Node is Left Heavy, Its Left Is also Left Heavy... Perform Right Rotation
+        if (balance > 1 && getBalance(node.left) >= 0)
+            return rotateRight(node);
 
-        // Left Right Case
-        if (balance > 1 && getBalance(root.left) < 0)
-        {
-            root.left = rotateLeft(root.left);
-            return rotateRight(root);
+        // Current Node Is Left Heavy, Its Left Node is Right heavy, Requires Left Rotation Then Right
+        if (balance > 1 && getBalance(node.left) < 0) {
+            node.left = rotateLeft(node.left);
+            return rotateRight(node);
         }
 
-        // Right Right Case
-        if (balance < -1 && getBalance(root.right) <= 0)
-            return rotateLeft(root);
+        // Current Node is Right Heavy and Its Right is also Heavy , Requires Left Rotation
+        if (balance < -1 && getBalance(node.right) <= 0)
+            return rotateLeft(node);
 
-        // Right Left Case
-        if (balance < -1 && getBalance(root.right) > 0)
-        {
-            root.right = rotateRight(root.right);
-            return rotateLeft(root);
+        // Current Node is Right Heavy, but its Left Node is Left Heavy, Required Right Rotation then Rotate Left
+        if (balance < -1 && getBalance(node.right) > 0) {
+            node.right = rotateRight(node.right);
+            return rotateLeft(node);
         }
 
-        return root;
+        return node;
     }
 
+    String getPreOrderString() {
+        return getPreOrderString(root);
+    }
+
+    private String getPreOrderString(Node node) {
+        if (node == null) return "";
+        return node.key + " " + getPreOrderString(node.left) + getPreOrderString(node.right);
+
+    }
+
+    String getInOrderString() {
+        return getInOrderString(root);
+    }
+
+    private String getInOrderString(Node node) {
+        if (node == null) return "";
+        return getPreOrderString(node.left) + node.key + " " + getPreOrderString(node.right);
+    }
 
     public static class Node {
 
@@ -301,6 +306,14 @@ public class AVL {
         public Node(int key) {
             this.key = key;
             this.nodeHeight = 1; // Initial Height will always be one
+        }
+
+        public Node getMin() {
+            //IF current node has missing left, that means this is the last item at left
+            if (left == null)
+                return this;
+            else
+                return left.getMin();// Rerun the same function on current node's left
         }
     }
 
