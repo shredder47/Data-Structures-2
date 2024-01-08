@@ -90,6 +90,7 @@ public class AVL {
         root = insert(root, key);
 
     }
+
     public void deleteNode(int key) {
         root = deleteNode(root, key);
     }
@@ -181,6 +182,17 @@ public class AVL {
         }
 
         return node;
+    }
+
+    public int h(Node n) {
+        if (n == null)
+            return -1;
+        return Math.max(1 + h(n.left), 1 + h(n.right));
+
+    }
+
+    public int height() {
+        return h(root);
     }
 
 

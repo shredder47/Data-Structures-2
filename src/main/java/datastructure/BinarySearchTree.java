@@ -129,9 +129,9 @@ class BinarySearchTree {
 
             //CASE1: When it's a leaf Node
             if (node.left == null && node.right == null) node = null;
-            //CASE2: When it has only one child
-            else if (node.left == null)  node = node.right;
-            else if (node.right == null)  node = node.left;
+                //CASE2: When it has only one child
+            else if (node.left == null) node = node.right;
+            else if (node.right == null) node = node.left;
             else {
                 //CASE3: Having two Child
 
@@ -147,7 +147,7 @@ class BinarySearchTree {
 
                 //deleting the min value we just captured, so making a recursive call to deleting
                 //which will be a CASE1/2 deletion  :)
-                node.right = delete(node.right,minKey);
+                node.right = delete(node.right, minKey);
 
             }
             //Return the mutated node to the caller
@@ -165,6 +165,16 @@ class BinarySearchTree {
         return node;
     }
 
+    public int h(BTNode n) {
+        if (n == null)
+            return -1;
+        return Math.max(1 + h(n.left), 1 + h(n.right));
+
+    }
+
+    public int height() {
+        return h(root);
+    }
 
     public void prettyPrint() {
         // Hard coded print out of binary tree depth = 3
@@ -239,7 +249,6 @@ class BinarySearchTree {
     }
 
 
-
     public static class BTNode {
         int key;
         String value;
@@ -252,8 +261,8 @@ class BinarySearchTree {
             this.value = value;
         }
 
-        public BTNode getMin(){
-            if(left==null)
+        public BTNode getMin() {
+            if (left == null)
                 return this;
             else
                 return left.getMin();
