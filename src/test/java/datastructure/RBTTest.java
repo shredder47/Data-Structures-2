@@ -23,10 +23,11 @@ public class RBTTest {
         rbt.insert(60);
         rbt.insert(70);
         rbt.insert(80);
+        rbt.insert(4);
+        rbt.insert(8);
 
+        Assert.assertEquals("(40 , B) (20 , R) (8 , B) (4 , R) (10 , R) (30 , B) (60 , R) (50 , B) (70 , B) (80 , R) ",rbt.preOrderPrint());
 
-
-        System.out.println(rbt);
 
     }
 
