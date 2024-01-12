@@ -1,22 +1,21 @@
 package datastructure.algorithms;
 
 import algorithms.MergeShort;
+import algorithms.QuickSort;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Array;
 import java.util.Arrays;
 import java.util.Random;
 
-public class MergeSortTest {
+public class QuickSortTest {
 
-    private MergeShort mergeSort;
+    private QuickSort quickSort;
 
     @Before
     public void SetUp() {
-        mergeSort = new MergeShort();
-
+        quickSort = new QuickSort();
     }
 
     @Test
@@ -24,8 +23,9 @@ public class MergeSortTest {
 
         int[] arr = {4, 7, 14, 1, 3, 9, 17};
 
+        quickSort = new QuickSort();
 
-        mergeSort.sort(arr);
+        quickSort.sort(arr);
 
         Assert.assertEquals(1, arr[0]);
         Assert.assertEquals(3, arr[1]);
@@ -36,7 +36,20 @@ public class MergeSortTest {
         Assert.assertEquals(17, arr[6]);
 
         System.out.println("\nSorted array");
-        mergeSort.printArray(arr);
+        quickSort.printArray(arr);
+    }
+
+    @Test
+    public void Sort1() {
+
+        int[] arr = {1,8,3,9,4,5,7};
+
+        quickSort = new QuickSort();
+
+        quickSort.sort(arr);
+
+        System.out.println("\nSorted array");
+        quickSort.printArray(arr);
     }
 
     @Test
@@ -53,9 +66,9 @@ public class MergeSortTest {
 
         System.out.println("Before");
         System.out.println(Arrays.toString(arr));
-        mergeSort.sort(arr);
+        quickSort.sort(arr);
         System.out.println("\nSorted array");
-        mergeSort.printArray(arr);
+        quickSort.printArray(arr);
     }
 
     @Test
@@ -69,11 +82,12 @@ public class MergeSortTest {
             arr[i] = random.nextInt(100000);
         }
 
+
         System.out.println("Before");
         System.out.println(Arrays.toString(arr));
-        mergeSort.sort(arr);
+        quickSort.sort(arr);
         System.out.println("\nSorted array");
-        mergeSort.printArray(arr);
+        quickSort.printArray(arr);
     }
 
 }

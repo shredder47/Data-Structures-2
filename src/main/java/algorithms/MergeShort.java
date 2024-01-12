@@ -2,14 +2,8 @@ package algorithms;
 
 public class MergeShort {
 
-    int[] data;
 
-    public MergeShort(int[] data) {
-        this.data = data;
-    }
-
-
-    public void sort() {
+    public void sort(int[] data) {
         // Important to send end as data.length - 1
         sort(data, 0, data.length - 1);
     }
@@ -23,12 +17,12 @@ public class MergeShort {
         if (startIndex >= endIndex)
             return;
 
-        int midIndex =  (endIndex + startIndex) / 2;
+        int midIndex = (endIndex + startIndex) / 2;
 
         sort(data, startIndex, midIndex);
         sort(data, midIndex + 1, endIndex);
 
-        mergeArr(data,startIndex,midIndex,endIndex);
+        mergeArr(data, startIndex, midIndex, endIndex);
 
     }
 
@@ -41,29 +35,29 @@ public class MergeShort {
         int mergeArrPointer = 0;
 
         //do the comparison and populate the mergeArr
-        while (leftPointer <= midIndex && rightPointer <= endIndex){
+        while (leftPointer <= midIndex && rightPointer <= endIndex) {
 
-            if(data[leftPointer] <= data[rightPointer])
+            if (data[leftPointer] <= data[rightPointer])
                 mergeArr[mergeArrPointer++] = data[leftPointer++];
             else
-                mergeArr[mergeArrPointer++] =  data[rightPointer++];
+                mergeArr[mergeArrPointer++] = data[rightPointer++];
         }
 
-        while (leftPointer <=midIndex){
+        while (leftPointer <= midIndex) {
             mergeArr[mergeArrPointer++] = data[leftPointer++];
         }
-        while ((rightPointer <= endIndex)){
+        while ((rightPointer <= endIndex)) {
             mergeArr[mergeArrPointer++] = data[rightPointer++];
         }
 
-        for (int i = 0, j=startIndex; i < mergeArr.length; i++,j++) {
+        for (int i = 0, j = startIndex; i < mergeArr.length; i++, j++) {
             data[j] = mergeArr[i];
 
         }
 
     }
-    public void printArray()
-    {
+
+    public void printArray(int[] data) {
 
         for (int datum : data) System.out.print(datum + " ");
         System.out.println();
