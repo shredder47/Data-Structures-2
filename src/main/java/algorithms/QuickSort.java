@@ -50,7 +50,7 @@ public class QuickSort {
             }
         }
         //if all values are less than pivot, then k will be equal to high
-        // for input 1 8 3 9 4 5 7,  i will reach till 3, then pivot will come at 4, making [1, 3, 4, 5, 7, 9, 8],
+        // for input 1 8 3 9 4 5 7,  k will reach till 3, then pivot will come at 4, making [1, 3, 4, 5, 7, 9, 8],
         k++;
         int temp = data[k];
         data[k] = pivotValue;
