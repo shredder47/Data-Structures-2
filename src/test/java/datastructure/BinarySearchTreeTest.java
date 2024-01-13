@@ -115,6 +115,24 @@ public class BinarySearchTreeTest {
         bst.prettyPrint();
     }
 
+    @Test
+    public void traversPrint() {
+        bst.insert(5, "e");
+        bst.insert(3, "c");
+        bst.insert(2, "b");
+        bst.insert(4, "d");
+        bst.insert(7, "g");
+        bst.insert(6, "f");
+        bst.insert(8, "h");
+
+        bst.prettyPrint();
+        bst.printInOrderTraversal();
+        bst.printPreOrderTraversal();
+        bst.printPostOrderTraversal();
+        bst.printBFS();
+        bst.printDFS();
+    }
+
 //    @Test
 //    public void checkBST1() {
 //        bst.insert(5, "e");

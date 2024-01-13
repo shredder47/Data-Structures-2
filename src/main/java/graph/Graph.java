@@ -3,6 +3,8 @@ package graph;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
 
 public class Graph {
 
@@ -31,16 +33,16 @@ public class Graph {
         boolean[] visited = new boolean[V];
         LinkedList<Integer> queue = new LinkedList<>();
 
-        //for fist time
+        //for the first time
         visited[s] = true;
 
-        System.out.println("Traversed:" + s);
         queue.add(s);
 
         while (!queue.isEmpty()) {
 
             //get the first element/deque
             s = queue.poll();
+            System.out.println("Traversed:" + s);
 
             //get the adjacent vertex for the given vertex s
             LinkedList edges = adjMatrix[s];
@@ -54,16 +56,41 @@ public class Graph {
                 if (visited[s] == false) {
 
                     visited[s] = true;
-                    System.out.println("Traversed:" + s);
                     queue.add(s);
                 }
             }
 
-
         }
-
-
     }
 
+    public void DFS(int s){
+
+        Stack<Integer> stack = new Stack<>();
+        boolean[] visited = new boolean[V];
+
+        // put a first element at the stack
+        stack.add(s);
+        visited[s] = true;
+
+        while (!stack.isEmpty()){
+
+            Integer pop = stack.pop();
+            System.out.println(pop);
+
+            LinkedList currentNodeVertices = adjMatrix[pop];
+            Iterator verticesIterator = currentNodeVertices.iterator();
+
+            while (verticesIterator.hasNext()){
+
+                int x = (int) verticesIterator.next();
+                if(visited[x] == false){
+
+                    visited[x] = true;
+                    stack.add(x);
+
+                }
+            }
+        }
+    }
 
 }

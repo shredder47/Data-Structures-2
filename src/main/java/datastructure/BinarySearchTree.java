@@ -1,5 +1,9 @@
 package datastructure;
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 class BinarySearchTree {
 
     /*****************
@@ -248,6 +252,62 @@ class BinarySearchTree {
         }
     }
 
+    public void printBFS() {
+        System.out.println("\n BFS \n");
+        BFS(root);
+    }
+
+    private void BFS(BTNode node) {
+
+        if (root == null)
+            return;
+
+        //As usual adding the first node manually
+        Queue<BTNode> queue = new LinkedList<>();
+        queue.add(node);
+
+        //Traverse till queue is empty
+        while (!queue.isEmpty()) {
+
+            BTNode currentNode = queue.poll(); //Deque one item at a time
+
+            System.out.println(currentNode.key);
+
+            if (currentNode.left != null)
+                queue.add(currentNode.left);
+
+            if (currentNode.right != null) {
+                queue.add(currentNode.right);
+            }
+        }
+    }
+
+    public void printDFS() {
+        System.out.println("\n DFS \n");
+
+        DFS(root);
+    }
+
+    private void DFS(BTNode node) {
+
+        if (node == null)
+            return;
+
+        Stack<BTNode> stack = new Stack<>();
+        stack.add(node);
+
+        while (!stack.isEmpty()) {
+
+            BTNode currentNode = stack.pop();
+            System.out.println(currentNode.key);
+
+            if (currentNode.left != null)
+                stack.add(currentNode.left);
+
+            if (currentNode.right != null)
+                stack.add(currentNode.right);
+        }
+    }
 
     public static class BTNode {
         int key;
