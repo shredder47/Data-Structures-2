@@ -66,7 +66,25 @@ public class GraphTest {
         g.addEdge(2, 7);
         g.addEdge(7, 2);
 
-        System.out.println("Following is Breadth First Traversal "+
+        System.out.println("Following is Depth First Traversal "+
+                "(starting from vertex 0)");
+
+        g.DFS(0);
+    }
+
+    @Test
+    public void depthFirstSearch2() {
+
+        //Cyclic Graph
+        g = new Graph(6);
+        g.addEdge(0, 1);
+        g.addEdge(0, 2);
+        g.addEdge(1, 3);
+        g.addEdge(2, 4);
+        g.addEdge(4, 1);
+        g.addEdge(5, 3);
+
+        System.out.println("Following is depth First Traversal "+
                 "(starting from vertex 0)");
 
         g.DFS(0);

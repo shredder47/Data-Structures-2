@@ -133,10 +133,6 @@ public class AVLTreeTest {
 
     @Test
     public void delete2() {
-        // Insertion Order
-        // 9,5,10,0,6,11,-1,1,2,44,23,52,12,45,65
-
-
         avl.insert(30);
         avl.insert(35);
         avl.insert(40);
@@ -153,8 +149,28 @@ public class AVLTreeTest {
         avl.prettyPrint();
         Assert.assertEquals("30 20 35 ", avl.getPreOrderString());
 
-
     }
 
+
+    @Test
+    public void delete3() {
+        // Insertion Order
+        // 9,5,10,11
+
+
+        avl.insert(9);
+        avl.insert(5);
+        avl.insert(10);
+        avl.insert(11);
+
+        avl.prettyPrint();
+        System.out.println("After deleting 9");
+        avl.deleteNode(9);
+        avl.prettyPrint();
+        Assert.assertEquals("10 5 11 ", avl.getPreOrderString());
+        System.out.println("\n\nAfter deleting 40");
+
+
+    }
 }
 
