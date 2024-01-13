@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.tree;
 
 import org.junit.Assert;
 import org.junit.Before;

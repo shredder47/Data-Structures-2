@@ -1,6 +1,5 @@
 package datastructure.algorithms;
 
-import algorithms.MergeShort;
 import algorithms.QuickSort;
 import org.junit.Assert;
 import org.junit.Before;

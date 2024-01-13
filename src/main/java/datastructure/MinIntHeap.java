@@ -1,7 +1,5 @@
 package datastructure;
 
-import static java.util.Collections.swap;
-
 public class MinIntHeap {
 
     int size;

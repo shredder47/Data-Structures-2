@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.tree;
 
 import static java.lang.Math.max;
 
@@ -17,9 +17,9 @@ public class AVL {
         }
 
         if (key < node.key) {
-            node.left = insert(node.left, key); // add the mutated node to the left of current Node
+            node.left = insert(node.left, key); // add the mutated node to the left of the current Node
         } else if (key > node.key) {
-            node.right = insert(node.right, key); // add the mutated node to the right of current Node
+            node.right = insert(node.right, key); // add the mutated node to the right of the current Node
         } else
             return node;// As duplicate not possible
 

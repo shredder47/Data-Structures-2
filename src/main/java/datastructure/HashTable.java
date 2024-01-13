@@ -1,7 +1,5 @@
 package datastructure;
 
-import java.util.Objects;
-
 public class HashTable {
 
     private int INT_CAP = 16;

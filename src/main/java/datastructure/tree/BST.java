@@ -1,10 +1,10 @@
-package datastructure;
+package datastructure.tree;
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-class BinarySearchTree {
+class BST {
 
     /*****************
      *      5
@@ -16,7 +16,7 @@ class BinarySearchTree {
 
     BTNode root;
 
-    public BinarySearchTree() {
+    public BST() {
         root = null;
     }
 

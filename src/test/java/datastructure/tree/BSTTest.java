@@ -1,16 +1,16 @@
-package datastructure;
+package datastructure.tree;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BinarySearchTreeTest {
+public class BSTTest {
 
-    private BinarySearchTree bst;
+    private BST bst;
 
     @Before
     public void SetUp() {
-        bst = new BinarySearchTree();
+        bst = new BST();
     }
 
     @Test
