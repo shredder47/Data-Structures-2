@@ -10,6 +10,57 @@ public class Graph2<T> {
         this.adjMatrix = new HashMap<>();
     }
 
+    public void addEdges(T v1, T v2) {
+        //If key is new
+        if (!adjMatrix.containsKey(v1)) {
+            //Create a new List for that key
+            List<T> neighbors = new ArrayList<>();
+            adjMatrix.put(v1, neighbors);
+        }
+        if (v2 != null)
+            adjMatrix.get(v1).add(v2);
+    }
+
+
+    //----- Properties
+
+    public int shortestPath( T src, T dst){
+
+        if (src == dst) return 0;
+
+        Set<T> visited= new HashSet<>();
+
+        //We can only use BFS for this algorithm
+        Queue<String> queue = new LinkedList<>();
+
+        visited.add(src);
+        queue.add(src+"_"+"0");
+
+        while (!queue.isEmpty()){
+
+            String keyAndDistance = queue.poll();
+            T key = (T) keyAndDistance.split("_")[0];
+            int distance =  Integer.parseInt( keyAndDistance.split("_")[1]);
+
+            if (dst.equals(key)) return distance;
+
+            List<T> neighbors = adjMatrix.getOrDefault(key, Collections.emptyList());
+
+            for (T neighbor : neighbors) {
+                if(!visited.contains(neighbor)){
+                    visited.add(neighbor);
+                    queue.add(neighbor + "_" + (distance+1));
+                }
+            }
+        }
+
+
+        return -1;
+    }
+
+
+
+
     public int connectedComponentCount() {
 
         Set<T> nodes = adjMatrix.keySet();
@@ -26,17 +77,6 @@ public class Graph2<T> {
 
 
         return numComponents;
-    }
-
-    public void addEdges(T v1, T v2) {
-        //If key is new
-        if (!adjMatrix.containsKey(v1)) {
-            //Create a new List for that key
-            List<T> neighbors = new ArrayList<>();
-            adjMatrix.put(v1, neighbors);
-        }
-        if (v2 != null)
-            adjMatrix.get(v1).add(v2);
     }
 
     public boolean hasPath(T src, T dst) {
@@ -68,6 +108,8 @@ public class Graph2<T> {
         return false;
     }
 
+
+    //----- Traversing-----
     public void performDFSRec(T src) {
         Set<T> visited = new HashSet<>();
         performDFSRec(src, visited);

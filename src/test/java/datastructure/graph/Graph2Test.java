@@ -191,4 +191,27 @@ public class Graph2Test {
 
     }
 
+    @Test
+    public void shortestDistance() {
+        Graph2<String> g = new Graph2<>();
+        g.addEdges("w","x");
+        g.addEdges("x","w");
+        g.addEdges("x","y");
+        g.addEdges("y","x");
+        g.addEdges("z","y");
+        g.addEdges("y","z");
+        g.addEdges("z","v");
+        g.addEdges("v","z");
+        g.addEdges("w","v");
+        g.addEdges("v","w");
+        g.addEdges("p","y");
+        g.addEdges("y","p");
+
+        int i = g.shortestPath("w", "p");
+        System.out.println(i);
+
+    }
+
+
+
 }

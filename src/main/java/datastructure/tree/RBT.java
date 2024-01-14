@@ -30,7 +30,7 @@ public class RBT {
             return node;// As duplicate not possible
 
 
-        if (isBlackNode(node) & hasRedRightChild(node) && hasRedRightGrandChild(node) & hasLeftRedUncle(node)) {
+        if (isBlackNode(node) & hasRedRightChild(node) && hasRedRightGrandChild(node) & hasLeftRedChild(node)) {
             //Swap Colors
             node.red = true;
             node.right.red = false;
@@ -39,16 +39,16 @@ public class RBT {
 
         }
 
-        if (isBlackNode(node) && hasRedRightChild(node) && hasRedRightGrandChild(node) && hasLeftBlackUncle(node)) {
+        if (isBlackNode(node) && hasRedRightChild(node) && hasRedRightGrandChild(node) && hasLeftBlackChild(node)) {
             node = rotateLeft(node);
         }
 
-        if (isBlackNode(node) && hasRedRightChildAndRedLeftGrandChild(node) && hasLeftBlackUncle(node)) {
+        if (isBlackNode(node) && hasRedRightChildAndRedLeftGrandChild(node) && hasLeftBlackChild(node)) {
             node.right = rotateRight(node.right);
             node = rotateLeft(node);
         }
 
-        if (isBlackNode(node) & hasRedLeftChild(node) && hasRedLeftGrandChild(node) & hasRightRedUncle(node)) {
+        if (isBlackNode(node) & hasRedLeftChild(node) && hasRedLeftGrandChild(node) & hasRightRedChild(node)) {
             //Swap Colors
             node.red = true;
             node.right.red = false;
@@ -56,11 +56,11 @@ public class RBT {
             node.left.red = false;
         }
 
-        if (isBlackNode(node) & hasRedLeftChild(node) && hasRedLeftGrandChild(node) & hasRightBlackUncle(node)) {
+        if (isBlackNode(node) & hasRedLeftChild(node) && hasRedLeftGrandChild(node) & hasRightBlackChild(node)) {
             node = rotateRight(node);
         }
 
-        if (isBlackNode(node) & hasRedLeftChildAndRedRightGrandChild(node) & hasRightBlackUncle(node)) {
+        if (isBlackNode(node) & hasRedLeftChildAndRedRightGrandChild(node) & hasRightBlackChild(node)) {
             node.left = rotateLeft(node.left);
             node = rotateRight(node);
         }
@@ -143,7 +143,7 @@ public class RBT {
 
     // Right CHECK Routines
 
-    public boolean hasRightBlackUncle(Node node) {
+    public boolean hasRightBlackChild(Node node) {
         return node.right == null || (node.right != null && !node.right.red);
     }
 
@@ -151,7 +151,7 @@ public class RBT {
         return (hasRedRightChild(node) && (node.right.left != null && node.right.left.red));
     }
 
-    public boolean hasRightRedUncle(Node node) {
+    public boolean hasRightRedChild(Node node) {
         if (node.right == null)
             return false; // Black Node
         return node.right.red;
@@ -166,7 +166,7 @@ public class RBT {
     }
 
     //Left Check Routines
-    public boolean hasLeftBlackUncle(Node node) {
+    public boolean hasLeftBlackChild(Node node) {
         return node.left == null || (node.left != null && !node.left.red);
     }
 
@@ -178,8 +178,8 @@ public class RBT {
         return node.left.left != null && node.left.left.red;
     }
 
-    public boolean hasLeftRedUncle(Node node) {
-        if (node.left == null) return false; //Black Uncle
+    public boolean hasLeftRedChild(Node node) {
+        if (node.left == null) return false; //Black Child
         return (node.left.red);
 
     }
@@ -216,7 +216,7 @@ public class RBT {
 
         public Node(int key, Node parent) {
             this.key = key;
-            this.red = true; // Initially all new nodes are RED in color
+            this.red = true; // Initially, all new nodes are RED
             this.parent = parent;
         }
 
