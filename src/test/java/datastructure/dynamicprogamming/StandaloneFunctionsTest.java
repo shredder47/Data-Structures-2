@@ -18,5 +18,15 @@ public class StandaloneFunctionsTest {
 
     }
 
+    @Test
+    public void allCombinations() {
+
+        StandaloneFunctions s = new StandaloneFunctions();
+        System.out.println(s.allCombinations(4, new int[]{1, 2}));
+        System.out.println(s.bestSum(4, new int[]{1, 2}));
+
+
+    }
+
 
 }
