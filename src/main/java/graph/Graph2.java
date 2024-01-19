@@ -4,21 +4,21 @@ import java.util.*;
 
 public class Graph2<T> {
 
-    private final Map<T, List<T>> adjMatrix;
+    private final Map<T, List<T>> adjList;
 
     public Graph2() {
-        this.adjMatrix = new HashMap<>();
+        this.adjList = new HashMap<>();
     }
 
     public void addEdges(T v1, T v2) {
         //If key is new
-        if (!adjMatrix.containsKey(v1)) {
+        if (!adjList.containsKey(v1)) {
             //Create a new List for that key
             List<T> neighbors = new ArrayList<>();
-            adjMatrix.put(v1, neighbors);
+            adjList.put(v1, neighbors);
         }
         if (v2 != null)
-            adjMatrix.get(v1).add(v2);
+            adjList.get(v1).add(v2);
     }
 
 
@@ -44,7 +44,7 @@ public class Graph2<T> {
 
             if (dst.equals(key)) return distance;
 
-            List<T> neighbors = adjMatrix.getOrDefault(key, Collections.emptyList());
+            List<T> neighbors = adjList.getOrDefault(key, Collections.emptyList());
 
             for (T neighbor : neighbors) {
                 if(!visited.contains(neighbor)){
@@ -58,12 +58,9 @@ public class Graph2<T> {
         return -1;
     }
 
-
-
-
     public int connectedComponentCount() {
 
-        Set<T> nodes = adjMatrix.keySet();
+        Set<T> nodes = adjList.keySet();
         Set<T> visited = new HashSet<>();
 
         int numComponents = 0;
@@ -93,7 +90,7 @@ public class Graph2<T> {
 
             if (pop == dst) return true;
 
-            List<T> neighbors = adjMatrix.getOrDefault(pop, Collections.emptyList());
+            List<T> neighbors = adjList.getOrDefault(pop, Collections.emptyList());
 
             //Explore neighbors if not visited
             for (T neighbor : neighbors) {
@@ -109,7 +106,7 @@ public class Graph2<T> {
     }
 
 
-    //----- Traversing-----
+    //------Traversing-----
     public void performDFSRec(T src) {
         Set<T> visited = new HashSet<>();
         performDFSRec(src, visited);
@@ -120,7 +117,7 @@ public class Graph2<T> {
         System.out.println("Visited: " + src);
 
         visited.add(src);
-        List<T> neighbors = adjMatrix.getOrDefault(src, Collections.emptyList());
+        List<T> neighbors = adjList.getOrDefault(src, Collections.emptyList());
 
         //Iteration of the list itself is a base case, i.e., when no neighbors end
         for (T neighbor : neighbors) {
@@ -143,7 +140,7 @@ public class Graph2<T> {
             System.out.println(pop);
 
             //Keying in to get its neighbors
-            List<T> neighbors = adjMatrix.getOrDefault(pop, Collections.emptyList());
+            List<T> neighbors = adjList.getOrDefault(pop, Collections.emptyList());
 
             for (T neighbor : neighbors) {
                 if (!visited.contains(neighbor)) {
@@ -170,7 +167,7 @@ public class Graph2<T> {
             System.out.println(pop);
 
             //Keying in to get its neighbors
-            List<T> neighbors = adjMatrix.getOrDefault(pop, Collections.emptyList());
+            List<T> neighbors = adjList.getOrDefault(pop, Collections.emptyList());
 
             for (T neighbor : neighbors) {
                 if (!visited.contains(neighbor)) {
