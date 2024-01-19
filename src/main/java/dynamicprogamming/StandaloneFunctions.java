@@ -63,7 +63,7 @@ public class StandaloneFunctions {
 
         int bestIndex = 0;
         for (int i = 0; i < combinations.size(); i++) {
-            if(combinations.get(i).size() < combinations.get(bestIndex).size())
+            if (combinations.get(i).size() < combinations.get(bestIndex).size())
                 bestIndex = i;
         }
 
@@ -104,6 +104,104 @@ public class StandaloneFunctions {
             visited.remove(visited.size() - 1);
 
         }
+        return;
+    }
+
+
+    /*
+                        abcdef
+                      /    |    \
+                 ab  /     | abc \ abcd
+                    /      |      \
+                 cdef     def     ef
+                   |       |
+                cd |       | def
+                   |       |
+                   ef    [''] -> True
+
+            only remove prefix, no removal from mid or end
+
+     */
+
+
+    //abcdef , [ab,abc,cd,def,abcd]
+    public boolean canConstruct(String target, String[] wordBank) {
+
+        //base case, when target is empty return true
+
+        if (target.isEmpty()) {
+            return true;
+        }
+
+        for (String word : wordBank) {
+
+            //If word starts matching from the first end, ex: abcdef.indexOf(ab) = 0 || abcdef.indexOf(bc) = 1
+            if (target.indexOf(word) == 0) {
+                String newTarget = target.substring(word.length());
+
+                boolean canConstruct = canConstruct(newTarget, wordBank);
+                if (canConstruct)
+                    return true;
+            }
+
+        }
+
+        return false;
+    }
+
+    public int numWaysCanConstruct(String target, String[] wordBank) {
+
+        //base case, when target is empty return true
+
+        if (target.isEmpty()) {
+            return 1;
+        }
+        int numWays = 0;
+        for (String word : wordBank) {
+
+            //If word starts matching from the first end, ex: abcdef.indexOf(ab) = 0 || abcdef.indexOf(bc) = 1
+            if (target.indexOf(word) == 0) {
+                String newTarget = target.substring(word.length());
+
+                int numWaysCanConstruct = numWaysCanConstruct(newTarget, wordBank);
+                numWays = numWays + numWaysCanConstruct;
+            }
+        }
+        return numWays;
+    }
+
+    public List<List<String>> combinationOfConstruct(String target, String[] wordBank) {
+        List<List<String>> combinations = new ArrayList<>();
+        List<String> visitedWords = new ArrayList<>();
+        combinationOfConstruct(target, wordBank, combinations, visitedWords);
+        if (combinations.isEmpty()) return null;
+        else return combinations;
+    }
+
+    private void combinationOfConstruct(String target, String[] wordBank, List<List<String>> combinations, List<String> visitedWords) {
+
+        //base case, when target is empty return true
+
+        if (target.isEmpty()) {
+            combinations.add(new ArrayList<>(visitedWords));
+            return;
+        }
+
+        for (String word : wordBank) {
+
+            //If word starts matching from the first end, ex: abcdef.indexOf(ab) = 0 || abcdef.indexOf(bc) = 1
+            if (target.indexOf(word) == 0) {
+                visitedWords.add(word);
+                String newTarget = target.substring(word.length());
+
+                combinationOfConstruct(newTarget, wordBank, combinations, visitedWords);
+
+                //Once the above function has returned either with true or false, back track and do the next combination
+                visitedWords.remove(visitedWords.size() - 1);
+            }
+        }
+
+
         return;
     }
 
