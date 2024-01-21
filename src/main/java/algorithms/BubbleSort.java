@@ -6,6 +6,7 @@ public class BubbleSort {
 
     public int[] arr;
 
+
     public BubbleSort(int[] arr) {
         this.arr = arr;
     }
