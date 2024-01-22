@@ -1,7 +1,6 @@
-package datastructure.algorithms;
+package datastructure.algorithms.sorting;
 
-import algorithms.BubbleSort;
-import algorithms.QuickSelect;
+import algorithms.sorting.BubbleSort;
 import org.junit.Assert;
 import org.junit.Test;
 
