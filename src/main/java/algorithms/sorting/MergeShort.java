@@ -65,3 +65,4 @@ public class MergeShort {
 
 }
 
+//day1- 17,34,38
