@@ -212,6 +212,20 @@ public class Graph2Test {
 
     }
 
+    @Test
+    public void testTopological() {
+        Graph2<Integer> g = new Graph2<>();
+        g.addEdges(5, 2);
+        g.addEdges(5, 0);
+        g.addEdges(4, 0);
+        g.addEdges(4, 1);
+        g.addEdges(2, 3);
+        g.addEdges(3, 1);
+
+        g.performTopologicalSort();
+
+    }
+
 
 
 }

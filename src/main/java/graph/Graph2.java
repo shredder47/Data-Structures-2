@@ -24,32 +24,32 @@ public class Graph2<T> {
 
     //----- Properties
 
-    public int shortestPath( T src, T dst){
+    public int shortestPath(T src, T dst) {
 
         if (src == dst) return 0;
 
-        Set<T> visited= new HashSet<>();
+        Set<T> visited = new HashSet<>();
 
         //We can only use BFS for this algorithm
         Queue<String> queue = new LinkedList<>();
 
         visited.add(src);
-        queue.add(src+"_"+"0");
+        queue.add(src + "_" + "0");
 
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
 
             String keyAndDistance = queue.poll();
             T key = (T) keyAndDistance.split("_")[0];
-            int distance =  Integer.parseInt( keyAndDistance.split("_")[1]);
+            int distance = Integer.parseInt(keyAndDistance.split("_")[1]);
 
             if (dst.equals(key)) return distance;
 
             List<T> neighbors = adjList.getOrDefault(key, Collections.emptyList());
 
             for (T neighbor : neighbors) {
-                if(!visited.contains(neighbor)){
+                if (!visited.contains(neighbor)) {
                     visited.add(neighbor);
-                    queue.add(neighbor + "_" + (distance+1));
+                    queue.add(neighbor + "_" + (distance + 1));
                 }
             }
         }
@@ -180,30 +180,38 @@ public class Graph2<T> {
         }
     }
 
+    //------Sorting--------
+    public void performTopologicalSort() {
 
-    public static void main(String[] args) {
-        Graph2<Integer> graph2 = new Graph2<>();
-        graph2.addEdges(0, 1);
-        graph2.addEdges(0, 6);
-        graph2.addEdges(0, 3);
-        graph2.addEdges(1, 4);
-        graph2.addEdges(1, 5);
-        graph2.addEdges(1, 0);
-        graph2.addEdges(2, 5);
-        graph2.addEdges(2, 7);
-        graph2.addEdges(3, 0);
-        graph2.addEdges(3, 5);
-        graph2.addEdges(4, 1);
-        graph2.addEdges(4, 6);
-        graph2.addEdges(5, 1);
-        graph2.addEdges(5, 2);
-        graph2.addEdges(5, 3);
-        graph2.addEdges(6, 0);
-        graph2.addEdges(6, 4);
-        graph2.addEdges(7, 2);
+        Set<T> visited = new HashSet<>();
+        Stack<T> stack = new Stack<>();
 
-        System.out.println(graph2.hasPath(3, 7));
+
+        // So that it goes to disconnected nodes
+        for (T t : adjList.keySet()) {
+            performDFSRecTopological(t, visited, stack);
+        }
+
+        //Print the Stack
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop() + " ");
+        }
     }
 
+    private void performDFSRecTopological(T src, Set<T> visited, Stack<T> stack) {
+
+        if (visited.contains(src))
+            return;
+
+        visited.add(src);
+        List<T> neighbors = adjList.getOrDefault(src, Collections.emptyList());
+
+        //Iteration of the list itself is a base case, i.e., when no neighbors end
+        for (T neighbor : neighbors) {
+            if (!visited.contains(neighbor))
+                performDFSRecTopological(neighbor, visited, stack);
+        }
+        stack.push(src);
+    }
 
 }
