@@ -232,7 +232,7 @@ public class Graph2Test {
     }
 
     @Test
-    public void hasCycleCheck() {
+    public void hasCycleNonDirectedCheck() {
         Graph2<Integer> g = new Graph2<>();
         g.addEdges(1, 0);
         g.addEdges(0, 1);
@@ -250,7 +250,7 @@ public class Graph2Test {
     }
 
     @Test
-    public void hasCycleCheck2() {
+    public void hasCycleNonDirectedCheck2() {
         Graph2<Integer> g = new Graph2<>();
         g.addEdges(1, 0);
         g.addEdges(0, 1);
@@ -266,12 +266,123 @@ public class Graph2Test {
     }
 
     @Test
-    public void hasCycleCheckCornerCase() {
+    public void hasCycleCheckNonDirectedCornerCase() {
         Graph2<Integer> g = new Graph2<>();
         g.addEdges(1, 0);
         g.addEdges(0, 1);
 
         Assert.assertFalse(g.hasCycleUnDirected(0));
+
+    }
+
+    @Test
+    public void hasCycleCheckDirectedCornerCase() {
+        Graph2<Integer> g = new Graph2<>();
+        g.addEdges(2, 1);
+        g.addEdges(0, 1);
+
+        Assert.assertFalse(g.hasCycleDirectedGraph(0));
+
+    }
+
+    @Test
+    public void hasCycleCheckDirected1() {
+        Graph2<Integer> g = new Graph2<>();
+        g.addEdges(1, 0);
+        g.addEdges(0, 2);
+        g.addEdges(2, 3);
+        g.addEdges(3, 0);
+
+
+        Assert.assertTrue(g.hasCycleDirectedGraph(1));
+
+    }
+
+    @Test
+    public void hasCycleCheckDirected2() {
+        Graph2<Integer> g = new Graph2<>();
+        g.addEdges(1, 0);
+        g.addEdges(2, 3);
+        g.addEdges(3, 0);
+
+        Assert.assertFalse(g.hasCycleDirectedGraph(1));
+
+    }
+
+    @Test
+    public void hasCycleCheckDirected3() {
+        Graph2<Integer> g = new Graph2<>();
+        g.addEdges(0, 1);
+        g.addEdges(0, 2);
+        g.addEdges(1, 2);
+        g.addEdges(2, 0);
+        g.addEdges(2, 3);
+        g.addEdges(3, 3);
+
+        Assert.assertTrue(g.hasCycleDirectedGraph(1));
+        Assert.assertTrue(g.hasCycleDirectedGraph(2));
+        Assert.assertTrue(g.hasCycleDirectedGraph(3));
+
+    }
+
+    @Test
+    public void hasCycleCheckDirected4() {
+        Graph2<Integer> g = new Graph2<>();
+
+        g.addEdges(1,2);
+        g.addEdges(4,1);
+        g.addEdges(2,4);
+        g.addEdges(3,4);
+        g.addEdges(5,2);
+        g.addEdges(1,3);
+
+
+        Assert.assertTrue(g.hasCycleDirectedGraph(1));
+        Assert.assertTrue(g.hasCycleDirectedGraph(2));
+        Assert.assertTrue(g.hasCycleDirectedGraph(3));
+
+    }
+
+    @Test
+    public void hasCycleCheckDirected5() {
+        Graph2<Integer> g = new Graph2<>();
+
+        g.addEdges(1,null);
+        g.addEdges(5,null);
+        g.addEdges(6,null);
+        g.addEdges(1,2);
+        g.addEdges(4,1);
+        g.addEdges(2,4);
+        g.addEdges(3,4);
+        g.addEdges(5,2);
+        g.addEdges(1,3);
+
+
+        Assert.assertTrue(g.hasCycleDirectedGraph(1));
+        Assert.assertTrue(g.hasCycleDirectedGraph(2));
+        Assert.assertTrue(g.hasCycleDirectedGraph(3));
+
+    }
+
+    @Test
+    public void hasCycleCheckDirected6() {
+        Graph2<Integer> g = new Graph2<>();
+
+        g.addEdges(2,null);
+        g.addEdges(5,null);
+        g.addEdges(4,null);
+        g.addEdges(1 ,2);
+        g.addEdges(2 ,3);
+        g.addEdges(3 ,4);
+        g.addEdges(4 ,5);
+        g.addEdges(2,null);
+        g.addEdges(1,null);
+        g.addEdges(1 ,2);
+
+
+        Assert.assertTrue(g.hasCycleDirectedGraph(1));
+        Assert.assertTrue(g.hasCycleDirectedGraph(2));
+        Assert.assertTrue(g.hasCycleDirectedGraph(3));
 
     }
 

@@ -113,6 +113,7 @@ public class Graph2<T> {
 
     public boolean performDFSCycleDetection(T src) {
 
+        // Key as Vertex, Value as its Parent
         Map<T, T> visited = new HashMap<>();
         Stack<T> stack = new Stack<>();
 
@@ -149,6 +150,58 @@ public class Graph2<T> {
             }
         }
 
+        return false;
+    }
+
+    public boolean hasCycleDirectedGraph(T src) {
+
+        Set<T> vertices = adjList.keySet();
+        //This will contain all the vertices that are processed/visited previously
+        Set<T> processedVertices = new HashSet<>();
+
+        //Check all paths even the disconnected ones
+        for (T vertex : vertices) {
+            //If the vertex is visited/processed previously then ignore
+            if (!processedVertices.contains(vertex)) {
+
+                HashSet<T> visited = new HashSet<>();
+                boolean foundCycle = hasCycleDFSDirectedGraph(vertex, visited);
+
+                if (foundCycle == false) {
+                    processedVertices.addAll(visited);
+                    //if no cycle found so far continue, with other paths if available
+                    hasCycleDFSDirectedGraph(src, visited);
+                } else return true;
+            }
+        }
+
+        //No cycle found so far after checking all vertices
+        return false;
+    }
+
+    private boolean hasCycleDFSDirectedGraph(T src, Set<T> visited) {
+
+        Stack<T> stack = new Stack<>();
+
+        stack.add(src);
+        visited.add(src);
+
+        while (!stack.isEmpty()) {
+
+            T pop = stack.pop();
+
+            List<T> neighbors = adjList.getOrDefault(pop, Collections.emptyList());
+
+            for (T neighbor : neighbors) {
+
+                if (!visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    stack.add(neighbor);
+                } else
+                    // if any path is leading to a previously visited node, that means it has a cycle
+                    return true;
+            }
+        }
         return false;
     }
 
@@ -228,6 +281,9 @@ public class Graph2<T> {
     }
 
     //------Sorting--------
+
+
+    //Only Applicable on DAG
     public void performTopologicalSort() {
 
         Set<T> visited = new HashSet<>();
