@@ -32,7 +32,7 @@ public class Queue {
 
     public int remove(){
 
-        // When queue is empty
+        // When the queue is empty
         if(head == null){
             return 0;
         }
