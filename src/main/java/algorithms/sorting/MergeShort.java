@@ -2,11 +2,19 @@ package algorithms.sorting;
 
 public class MergeShort {
 
+    /*
+        - Merge sort is a divide and conquer algorithm
+        - Divide the input array in two halves, and we keep halving recursively until they become too
+          small that cannot be broken further
+        - Merge halves by sorting them
+     */
 
     public void sort(int[] data) {
-        // Important to send end as data.length - 1
+        // Important to send the end as data.length - 1
         sort(data, 0, data.length - 1);
     }
+
+
 
 //                     s                        m                    e
 //                   [ 7    ,   6   ,   5   ,   4   ,   3   ,   2   ,1 ]

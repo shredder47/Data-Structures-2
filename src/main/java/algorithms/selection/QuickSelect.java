@@ -1,4 +1,4 @@
-package algorithms;
+package algorithms.selection;
 
 public class QuickSelect {
 

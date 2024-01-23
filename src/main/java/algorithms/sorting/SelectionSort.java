@@ -10,27 +10,32 @@ public class SelectionSort {
         this.arr = arr;
     }
 
+    /*
+            In case of selection sort we repeatedly find the minimum element and move it to the sorted part of array
+            to make unsorted part sorted
+     */
+
     public void sort() {
-//          k                             k                         k
-//          ||                            |  |                      |    |
+//           k                              k                           k
+//           ||                           |     |                    |      |
 //           {1, 8, 3, 9, 4, 5, 7} ->     {1, 8, 3, 9, 4, 5, 7}  -> {1, 3, 8, 9, 4, 5, 7}
 
-        int k = 0;
+        int sortRange = 0;
 
-        while (k < arr.length) {
+        while (sortRange < arr.length) {
 
-            int minVal = arr[k];
-            int minIndex = k;
+            int minVal = arr[sortRange];
+            int minIndex = sortRange;
 
-            for (int i = k; i < arr.length; i++) {
+            for (int i = sortRange; i < arr.length; i++) {
 
                 if (arr[i] < minVal) {
                     minVal = arr[i];
                     minIndex = i;
                 }
             }
-            swap(k, minIndex);
-            k++;
+            swap(sortRange, minIndex);
+            sortRange++;
         }
     }
 

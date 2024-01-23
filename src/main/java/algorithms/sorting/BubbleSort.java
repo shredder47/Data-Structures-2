@@ -5,8 +5,11 @@ import java.util.Arrays;
 public class BubbleSort {
 
     public int[] arr;
-
-
+    /*
+    - Bubble sort is also referred as Sinking sort
+    - We repeatedly compare each pair of adjacent items and swap them if they are in the wrong order
+    - Eventually at every iteration the bigger value will go to the end
+     */
     public BubbleSort(int[] arr) {
         this.arr = arr;
     }

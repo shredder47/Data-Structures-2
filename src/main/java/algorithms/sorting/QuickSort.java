@@ -2,6 +2,12 @@ package algorithms.sorting;
 
 public class QuickSort {
 
+    /*
+        - Quick sort is a divide and conquer algorithm
+        - Find pivot number and make sure smaller numbers located at the left of pivot, and bigger numbers
+          are located at the right of the pivot.
+        - Unlike merge sort, extra space is not required
+     */
 
     public void sort(int[] data) {
         sort(data, 0, data.length - 1);

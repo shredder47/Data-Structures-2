@@ -1,6 +1,6 @@
-package datastructure.algorithms;
+package datastructure.algorithms.selection;
 
-import algorithms.QuickSelect;
+import algorithms.selection.QuickSelect;
 import org.junit.Assert;
 import org.junit.Test;
 

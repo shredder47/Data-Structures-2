@@ -1,11 +1,8 @@
 package datastructure.algorithms.search;
 
-import algorithms.QuickSelect;
 import algorithms.search.BinarySearch;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Arrays;
 
 public class BinarySearchTest {
 

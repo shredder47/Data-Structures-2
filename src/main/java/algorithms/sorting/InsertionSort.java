@@ -5,11 +5,17 @@ import java.util.Arrays;
 public class InsertionSort {
 
 
-    public int arr[];
+    public int[] arr;
 
     public InsertionSort(int[] arr) {
         this.arr = arr;
     }
+
+    /*
+        - Divide the given array into two parts
+        - Take a first element from an unsorted array and find its correct position in sorted array
+        - Repeat until an unsorted array is empty
+     */
 
     //    sr=1                  sr=2               sr=3                  sr=4
     //     |                    |                    |                     |
