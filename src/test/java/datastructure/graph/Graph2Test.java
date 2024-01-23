@@ -1,9 +1,7 @@
 package datastructure.graph;
 
-import graph.Graph;
 import graph.Graph2;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 
@@ -78,11 +76,12 @@ public class Graph2Test {
         g.addEdges(4, 1);
         g.addEdges(5, 3);
 
-        System.out.println("Following is depth First Traversal "+
+        System.out.println("Following is depth First Traversal " +
                 "(starting from vertex 0)");
 
         g.performDFS(0);
     }
+
     @Test
     public void depthFirstSearch3Cyclic() {
         Graph2<Integer> g = new Graph2<>();
@@ -93,7 +92,7 @@ public class Graph2Test {
         g.addEdges(1, 2);
         g.addEdges(2, 0);
 
-        System.out.println("Following is depth First Traversal "+
+        System.out.println("Following is depth First Traversal " +
                 "(starting from vertex 0)");
 
         g.performDFS(0);
@@ -110,9 +109,12 @@ public class Graph2Test {
         g.addEdges(2, 0);
 
 
-        Assert.assertTrue(g.hasPath(0,2));;
-        Assert.assertTrue(g.hasPath(0,1));;
-        Assert.assertFalse(g.hasPath(0,4));;
+        Assert.assertTrue(g.hasPath(0, 2));
+        ;
+        Assert.assertTrue(g.hasPath(0, 1));
+        ;
+        Assert.assertFalse(g.hasPath(0, 4));
+        ;
     }
 
     @Test
@@ -137,9 +139,12 @@ public class Graph2Test {
         graph2.addEdges(6, 4);
         graph2.addEdges(7, 2);
 
-        Assert.assertTrue(graph2.hasPath(0,2));;
-        Assert.assertTrue(graph2.hasPath(0,1));;
-        Assert.assertFalse(graph2.hasPath(0,11));;
+        Assert.assertTrue(graph2.hasPath(0, 2));
+        ;
+        Assert.assertTrue(graph2.hasPath(0, 1));
+        ;
+        Assert.assertFalse(graph2.hasPath(0, 11));
+        ;
     }
 
     @Test
@@ -155,57 +160,57 @@ public class Graph2Test {
         g.addEdges(4, 1);
         g.addEdges(5, 3);
 
-        Assert.assertFalse(g.hasPath(0,5));
-        Assert.assertTrue(g.hasPath(0,2));
-        Assert.assertTrue(g.hasPath(5,5));
+        Assert.assertFalse(g.hasPath(0, 5));
+        Assert.assertTrue(g.hasPath(0, 2));
+        Assert.assertTrue(g.hasPath(5, 5));
     }
 
     @Test
     public void countNumComponentsTest() {
         Graph2<Integer> g = new Graph2<>();
-        g.addEdges(0,8);
-        g.addEdges(0,1);
-        g.addEdges(0,5);
-        g.addEdges(1,0);
-        g.addEdges(5,0);
-        g.addEdges(5,8);
-        g.addEdges(8,0);
-        g.addEdges(8,5);
-        g.addEdges(2,3);
-        g.addEdges(2,4);
-        g.addEdges(3,2);
-        g.addEdges(3,4);
-        g.addEdges(4,3);
-        g.addEdges(4,2);
+        g.addEdges(0, 8);
+        g.addEdges(0, 1);
+        g.addEdges(0, 5);
+        g.addEdges(1, 0);
+        g.addEdges(5, 0);
+        g.addEdges(5, 8);
+        g.addEdges(8, 0);
+        g.addEdges(8, 5);
+        g.addEdges(2, 3);
+        g.addEdges(2, 4);
+        g.addEdges(3, 2);
+        g.addEdges(3, 4);
+        g.addEdges(4, 3);
+        g.addEdges(4, 2);
 
-        Assert.assertEquals(2,g.connectedComponentCount());
+        Assert.assertEquals(2, g.connectedComponentCount());
 
-        g.addEdges(10,11);
-        g.addEdges(10,12);
+        g.addEdges(10, 11);
+        g.addEdges(10, 12);
 
-        Assert.assertEquals(3,g.connectedComponentCount());
+        Assert.assertEquals(3, g.connectedComponentCount());
 
-        g.addEdges(100,200);
+        g.addEdges(100, 200);
 
-        Assert.assertEquals(4,g.connectedComponentCount());
+        Assert.assertEquals(4, g.connectedComponentCount());
 
     }
 
     @Test
     public void shortestDistance() {
         Graph2<String> g = new Graph2<>();
-        g.addEdges("w","x");
-        g.addEdges("x","w");
-        g.addEdges("x","y");
-        g.addEdges("y","x");
-        g.addEdges("z","y");
-        g.addEdges("y","z");
-        g.addEdges("z","v");
-        g.addEdges("v","z");
-        g.addEdges("w","v");
-        g.addEdges("v","w");
-        g.addEdges("p","y");
-        g.addEdges("y","p");
+        g.addEdges("w", "x");
+        g.addEdges("x", "w");
+        g.addEdges("x", "y");
+        g.addEdges("y", "x");
+        g.addEdges("z", "y");
+        g.addEdges("y", "z");
+        g.addEdges("z", "v");
+        g.addEdges("v", "z");
+        g.addEdges("w", "v");
+        g.addEdges("v", "w");
+        g.addEdges("p", "y");
+        g.addEdges("y", "p");
 
         int i = g.shortestPath("w", "p");
         System.out.println(i);
@@ -226,6 +231,49 @@ public class Graph2Test {
 
     }
 
+    @Test
+    public void hasCycleCheck() {
+        Graph2<Integer> g = new Graph2<>();
+        g.addEdges(1, 0);
+        g.addEdges(0, 1);
+        g.addEdges(0, 3);
+        g.addEdges(3, 0);
+        g.addEdges(3, 2);
+        g.addEdges(3, 4);
+        g.addEdges(2, 3);
+        g.addEdges(2, 4);
+        g.addEdges(4, 3);
+        g.addEdges(4, 2);
+
+        Assert.assertTrue(g.hasCycleUnDirected(1));
+
+    }
+
+    @Test
+    public void hasCycleCheck2() {
+        Graph2<Integer> g = new Graph2<>();
+        g.addEdges(1, 0);
+        g.addEdges(0, 1);
+        g.addEdges(0, 3);
+        g.addEdges(3, 0);
+        g.addEdges(3, 2);
+        g.addEdges(2, 3);
+        g.addEdges(2, 4);
+        g.addEdges(4, 2);
+
+        Assert.assertFalse(g.hasCycleUnDirected(1));
+
+    }
+
+    @Test
+    public void hasCycleCheckCornerCase() {
+        Graph2<Integer> g = new Graph2<>();
+        g.addEdges(1, 0);
+        g.addEdges(0, 1);
+
+        Assert.assertFalse(g.hasCycleUnDirected(0));
+
+    }
 
 
 }

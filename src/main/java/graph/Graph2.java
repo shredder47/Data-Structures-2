@@ -105,6 +105,53 @@ public class Graph2<T> {
         return false;
     }
 
+    public boolean hasCycleUnDirected(T src) {
+
+        return performDFSCycleDetection(src);
+
+    }
+
+    public boolean performDFSCycleDetection(T src) {
+
+        Map<T, T> visited = new HashMap<>();
+        Stack<T> stack = new Stack<>();
+
+        visited.put(src, null);
+        stack.add(src);
+
+        while (!stack.isEmpty()) {
+
+            T pop = stack.pop();
+
+            List<T> neighbors = adjList.getOrDefault(pop, Collections.emptyList());
+
+            for (T neighbor : neighbors) {
+                // if vertex is not visited
+                if (!visited.containsKey(neighbor)) {
+                    visited.put(neighbor, pop);
+                    stack.add(neighbor);
+                } else { // when vertex is already visited,
+                    //check who introduced the current element
+                    T vertexIntroducedBy = visited.get(pop); // parent of the current element
+
+                    // if parent is a neighbor or null (in case of starting position)
+                    // then its fine else there is a cycle.
+                    // in the case of A <--> B, A's parent is null,
+                    // but B's parent is A. so when B's neighbors are being evaluated,
+                    // A is supposed to come as A is B's neighbor,
+                    // but it will not be a cycle as B as introduced by A
+                    if (vertexIntroducedBy == neighbor || vertexIntroducedBy == null)
+                        continue;
+                    else
+                        return true;
+                }
+
+            }
+        }
+
+        return false;
+    }
+
 
     //------Traversing-----
     public void performDFSRec(T src) {
@@ -200,6 +247,7 @@ public class Graph2<T> {
 
     private void performDFSRecTopological(T src, Set<T> visited, Stack<T> stack) {
 
+        /* As all visited nodes are calling this, we don't want to perform same operations */
         if (visited.contains(src))
             return;
 
@@ -211,6 +259,8 @@ public class Graph2<T> {
             if (!visited.contains(neighbor))
                 performDFSRecTopological(neighbor, visited, stack);
         }
+
+        //After adding everything, add the current element to stack
         stack.push(src);
     }
 
