@@ -47,4 +47,14 @@ public class BinarySearchTest {
 
     }
 
+    @Test
+    public void search5() {
+
+        int[] arr = new int[]{10,11,16,20};
+
+        BinarySearch binarySearch = new BinarySearch();
+        Assert.assertEquals(-1, binarySearch.performBinarySearch(13, arr));
+
+    }
+
 }

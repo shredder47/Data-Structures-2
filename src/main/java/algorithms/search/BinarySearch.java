@@ -24,7 +24,7 @@ public class BinarySearch {
 
         //if the number is less than mid-value, then the number must be on the right side of the mid as its sorted array
         if (num < arr[midIndex]) {
-            return binarySearch(num, arr, startIndex, midIndex);
+            return binarySearch(num, arr, startIndex, midIndex-1);
         } else {
             return binarySearch(num, arr, midIndex + 1, endIndex);
         }
