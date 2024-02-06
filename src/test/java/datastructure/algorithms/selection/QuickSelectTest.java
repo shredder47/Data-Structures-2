@@ -14,7 +14,7 @@ public class QuickSelectTest {
 
         int[] arr = {1,8,3,9,4,5,7};
         quickSelect = new QuickSelect(arr);
-        Assert.assertEquals(3,quickSelect.quickSelect(2));
+        Assert.assertEquals(4,quickSelect.quickSelect(3));
 
     }
 
