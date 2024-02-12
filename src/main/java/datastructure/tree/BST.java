@@ -213,6 +213,8 @@ class BST {
         return root.getMin().key;
     }
 
+
+    //Traversals
     public void printInOrderTraversal() {
         System.out.println("InOrder:");
         inOrderTraversal(root);
@@ -280,6 +282,73 @@ class BST {
                 queue.add(currentNode.right);
             }
         }
+    }
+
+    public void printLevelOrder() {
+
+/*
+     5
+   /  \
+  3    7
+ / \  / \
+2  4 6   8
+
+x
+[                        5, null] []
+[                           null] [5]                       poll -> 5
+[                       null 3 7] [5]                       poll -> null
+[                       3 7 null] [5]
+[                     7 null 2 4] [5,3]                     poll -> 3
+[                   null 2 4 6 7] [5,3]                     poll -> 7
+[                   2 4 6 7 null] [5,3]                     poll -> null
+[                     4 6 7 null] [5,3,2]                   poll -> 2
+[                       6 7 null] [5,3,2,4]                 poll -> 4
+[                         7 null] [5,3,2,4,6]               poll -> 6
+[                           null] [5,3,2,4,6]               poll -> 7
+[                               ] [5,3,2,4,6]               poll -> null , return
+
+ */
+
+        System.out.println("\nLEVEL ORDER");
+        levelOrder(root);
+        System.out.println(" ");
+    }
+
+    private void levelOrder(BTNode node) {
+
+        Queue<BTNode> queue = new LinkedList<>();
+
+        queue.add(node);
+        queue.add(null); // defines the end of level
+
+        while (!queue.isEmpty()) {
+
+            BTNode poll = queue.poll();
+
+            if (poll == null) {
+
+                //will be executed for the last element
+                if (queue.isEmpty())
+                    return;
+
+                //after adding next level's left right, when we poll we get null, now we push it at back to indicate new
+                //level is encountered
+                queue.add(null);
+
+                System.out.println(" ");
+
+                continue;
+            }
+
+            System.out.println(poll.key);
+
+            if(poll.left != null) queue.add(poll.left);
+            if(poll.right != null) queue.add(poll.right);
+
+
+        }
+
+
     }
 
     public void printDFS() {
