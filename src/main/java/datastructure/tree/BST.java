@@ -172,7 +172,7 @@ class BST {
 
     public int h(BTNode n) {
         if (n == null)
-            return -1;
+            return 0;
         return Math.max(1 + h(n.left), 1 + h(n.right));
 
     }

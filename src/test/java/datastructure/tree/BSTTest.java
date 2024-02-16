@@ -117,6 +117,18 @@ public class BSTTest {
 
     @Test
     public void traversPrint() {
+        /*
+
+                     5
+                   /   \
+                  3     7
+                 / \   / \
+                2   4 6   8
+
+
+
+
+         */
 
         bst.insert(5, "e");
         bst.insert(3, "c");
@@ -127,12 +139,13 @@ public class BSTTest {
         bst.insert(8, "h");
 
         bst.prettyPrint();
-      bst.printInOrderTraversal();
-      bst.printPreOrderTraversal();
-      bst.printPostOrderTraversal();
+        bst.printInOrderTraversal();
+        bst.printPreOrderTraversal();
+        bst.printPostOrderTraversal();
         bst.printLevelOrder();
         bst.printBFS();
         bst.printDFS();
+        System.out.println("\nheight: " + bst.height());
     }
 
 
