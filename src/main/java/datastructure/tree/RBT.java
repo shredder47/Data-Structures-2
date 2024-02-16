@@ -195,7 +195,7 @@ public class RBT {
 
     public int h(Node n) {
         if (n == null)
-            return -1;
+            return 0;
         return Math.max(1 + h(n.left), 1 + h(n.right));
     }
 
