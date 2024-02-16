@@ -60,6 +60,7 @@ class BST {
     }
 
 
+    //note: in bst we doing this logic but for normal binary tree we need to use dfs or bfs
     public BTNode find(int key, BTNode node) {
 
         //base case, when no more node remains in case of invalid search/item don't exist
@@ -340,7 +341,7 @@ x
                 continue;
             }
 
-            System.out.println(poll.key);
+            System.out.print(poll.key + " ");
 
             if(poll.left != null) queue.add(poll.left);
             if(poll.right != null) queue.add(poll.right);
