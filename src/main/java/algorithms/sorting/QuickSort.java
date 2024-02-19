@@ -16,18 +16,16 @@ public class QuickSort {
 
     public void sort(int[] data, int low, int high) {
 
-        if (low < high) {
+        if (low >= high)
+            return;
 
-            int pivotIndex = partition(data, low, high);
+        int pivotIndex = partition(data, low, high);
 
-            //Sort all the elements before pivot index
-            sort(data, low, pivotIndex - 1);
+        //Sort all the elements before pivot index
+        sort(data, low, pivotIndex - 1);
 
-            //sort all the elements after pivot index
-            sort(data, pivotIndex + 1, high);
-
-        }
-
+        //sort all the elements after pivot index
+        sort(data, pivotIndex + 1, high);
 
     }
 
@@ -48,13 +46,13 @@ public class QuickSort {
             if (data[i] < pivotValue) {
                 //swap
                 k++;
-                swap(data,k,i);
+                swap(data, k, i);
             }
         }
         //if all values are less than pivot, then k will be equal to high
         // for input 1 8 3 9 4 5 7,  k will reach till 3, then pivot will come at 4, making [1, 3, 4, 5, 7, 9, 8],
         k++;
-       swap(data,k,high);
+        swap(data, k, high);
 
         return k;
     }
@@ -64,6 +62,7 @@ public class QuickSort {
         for (int datum : data) System.out.print(datum + " ");
         System.out.println();
     }
+
     private void swap(int[] data, int index1, int index2) {
         int temp = data[index1];
         data[index1] = data[index2];
