@@ -57,13 +57,17 @@ public class QuickSortTest {
     public void Sort1() {
 
         int[] arr = {1,8,3,9,4,5,7};
+        int[] arr2 = {1,8,3,9,4,5,7};
 
         quickSort = new QuickSort();
 
         quickSort.sort(arr);
+        Arrays.sort(arr2);
 
         System.out.println("\nSorted array");
+
         quickSort.printArray(arr);
+        Assert.assertArrayEquals(arr2,arr);
     }
 
     @Test
