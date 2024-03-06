@@ -114,10 +114,11 @@ public class LinkedList {
         Node node = head;
 
         while (node.next != null) {
-            if (node.next.next == null) {
+            if (node.next.next == null) {   //            |-------------> reach here and delete last
+                                            // 1 -> 2 -> [3] -> 4
                 node.next = null;
                 size--;
-            } else
+            } else //continue iterating
                 node = node.next;
         }
 
@@ -145,3 +146,5 @@ public class LinkedList {
     }
 
 }
+
+// 1 -> 2 -> 3 -> 4
