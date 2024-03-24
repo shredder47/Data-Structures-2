@@ -121,7 +121,6 @@ public class LinkedList {
             } else //continue iterating
                 node = node.next;
         }
-
     }
 
     public void print() {
